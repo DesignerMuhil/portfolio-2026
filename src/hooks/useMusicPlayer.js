@@ -11,6 +11,13 @@ import playlist from "../data/playlist";
 const MOBILE_VOLUME = 0.03;
 const DESKTOP_VOLUME = 0.05;
 
+/* Music is desktop-only: disabled on tablets and phones (<= 1024px) */
+const NO_MUSIC_QUERY = "(max-width: 1024px)";
+
+const getMusicDisabled = () =>
+  typeof window !== "undefined" &&
+  window.matchMedia(NO_MUSIC_QUERY).matches;
+
 const INITIAL_VOLUME =
   typeof window !== "undefined" &&
   window.matchMedia("(max-width: 768px)").matches
@@ -32,11 +39,40 @@ const useMusicPlayer = () => {
 
   const [isMuted, setIsMuted] = useState(false);
 
+  const [musicDisabled, setMusicDisabled] =
+    useState(getMusicDisabled);
+
   /* =====================================================
-     CREATE AUDIO
+     WATCH SCREEN SIZE (rotate / resize)
   ===================================================== */
 
   useEffect(() => {
+    const media = window.matchMedia(NO_MUSIC_QUERY);
+
+    const handleChange = () => {
+      setMusicDisabled(media.matches);
+    };
+
+    handleChange();
+
+    media.addEventListener("change", handleChange);
+
+    return () => {
+      media.removeEventListener("change", handleChange);
+    };
+  }, []);
+
+  /* =====================================================
+     CREATE AUDIO  (skipped entirely on mobile / tablet)
+  ===================================================== */
+
+  useEffect(() => {
+    if (musicDisabled) {
+      shouldContinuePlayingRef.current = false;
+      setIsPlaying(false);
+      return undefined;
+    }
+
     const audio = new Audio();
 
     audio.preload = "metadata";
@@ -138,7 +174,7 @@ const useMusicPlayer = () => {
 
       audioRef.current = null;
     };
-  }, []);
+  }, [musicDisabled]);
 
   /* =====================================================
      LOAD CURRENT TRACK
@@ -148,7 +184,7 @@ const useMusicPlayer = () => {
     const audio = audioRef.current;
     const track = playlist[trackIndex];
 
-    if (!audio || !track) {
+    if (musicDisabled || !audio || !track) {
       return;
     }
 
@@ -173,7 +209,7 @@ const useMusicPlayer = () => {
           setIsPlaying(false);
         });
     }
-  }, [trackIndex]);
+  }, [trackIndex, musicDisabled]);
 
   /* =====================================================
      VOLUME
@@ -208,7 +244,7 @@ const useMusicPlayer = () => {
   const startMusic = useCallback(() => {
     const audio = audioRef.current;
 
-    if (!audio) return;
+    if (musicDisabled || !audio) return;
 
     shouldContinuePlayingRef.current = true;
 
@@ -230,7 +266,7 @@ const useMusicPlayer = () => {
         shouldContinuePlayingRef.current = false;
         setIsPlaying(false);
       });
-  }, []);
+  }, [musicDisabled]);
 
   /* =====================================================
      PLAY / PAUSE
@@ -325,6 +361,9 @@ const useMusicPlayer = () => {
   }, []);
 
   return {
+    /* false on mobile / tablet: hide every music control */
+    isMusicEnabled: !musicDisabled,
+
     currentTrack: playlist[trackIndex],
 
     trackIndex,

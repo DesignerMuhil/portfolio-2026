@@ -19,6 +19,8 @@ const formatTime = (seconds) => {
 
 const MusicPlayer = ({ player }) => {
   const {
+    isMusicEnabled = true,
+
     currentTrack,
     trackIndex,
     trackCount,
@@ -38,7 +40,8 @@ const MusicPlayer = ({ player }) => {
     toggleMute,
   } = player;
 
-  if (!currentTrack) return null;
+  /* No music UI on mobile / tablet */
+  if (!isMusicEnabled || !currentTrack) return null;
 
   const remainingTime =
     duration > 0 ? Math.max(duration - currentTime, 0) : 0;

@@ -567,3 +567,67 @@
   .work__intro { position: relative; top: auto; }
   .work__intro-sticky { position: static; height: auto; min-height: 0; }
 }
+
+/* ==========================================
+   CATEGORY CHIPS — MOBILE ONLY (<= 650px)
+   Keep at the END of the file.
+========================================== */
+@media (max-width: 650px) {
+  .work__categories {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+
+    width: 100%;
+    margin-top: 32px;
+  }
+
+  .work__category {
+    width: auto;
+    gap: 8px;
+    padding: 9px 12px;
+
+    border: 1px solid #34343a;
+    border-radius: 0;              /* sharp, matches the cards. Use 999px for pills */
+    background: transparent;
+
+    color: #a0a0aa;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+
+    -webkit-tap-highlight-color: transparent;
+    transition:
+      color 220ms ease,
+      background 220ms ease,
+      border-color 220ms ease;
+  }
+
+  .work__category span:last-child {
+    color: #6a6a74;
+    font-size: 9px;
+  }
+
+  /* neutral feedback only — no accent fill or stroke */
+  .work__category:hover,
+  .work__category:active {
+    border-color: #55555e;
+    color: var(--work-text);
+  }
+
+  /* cancel the accent colour the base styles give the active chip */
+  .work__category--active,
+  .work__category--active span:last-child {
+    color: #a0a0aa;
+  }
+
+  .work__category--active span:last-child {
+    color: #6a6a74;
+  }
+
+  .work__category:focus-visible {
+    outline: 1px solid #8a8a94;
+    outline-offset: 2px;
+  }
+}
