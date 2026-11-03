@@ -1,0 +1,369 @@
+
+/* ==========================================
+   SOCIAL CREATIVES PAGE
+   ========================================== */
+
+.social-creatives-page {
+  --sc-bg: #101010;
+  --sc-text: #f2f2ed;
+  --sc-accent: #a5a0ff;
+
+  position: relative;
+  width: 100%;
+  height: 100dvh;
+  min-height: 480px;
+  overflow: hidden;
+  isolation: isolate;
+
+  background: var(--sc-bg);
+  color: var(--sc-text);
+}
+
+/* ==========================================
+   HEADER
+   ========================================== */
+
+.social-creatives-header {
+  position: absolute;
+  z-index: 50;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+
+  padding: 32px clamp(20px, 4vw, 64px);
+  pointer-events: none;
+}
+
+/* ==========================================
+   BACK TO WORK BUTTON
+   ========================================== */
+
+.social-creatives-back {
+  position: relative;
+  z-index: 1;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-shrink: 0;
+
+  min-height: 44px;
+  padding: 12px 18px;
+
+  background: #101010;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 999px;
+
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+
+  cursor: pointer;
+  pointer-events: auto;
+
+  /* Instant hover — no animation */
+  transition: none;
+}
+
+/* Solid purple fill on hover */
+.social-creatives-back:hover {
+  background: var(--sc-accent);
+  border-color: var(--sc-accent);
+  color: #101010;
+}
+
+/* Back arrow */
+.social-creatives-back img {
+  display: block;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  object-fit: contain;
+
+  /* White arrow */
+  filter: brightness(0) invert(1);
+  transition: none;
+}
+
+/* Dark arrow on purple fill */
+.social-creatives-back:hover img {
+  filter: brightness(0);
+}
+
+.social-creatives-back span {
+  display: block;
+  line-height: 1;
+}
+
+/* Keyboard accessibility */
+.social-creatives-back:focus-visible {
+  outline: 2px solid var(--sc-accent);
+  outline-offset: 4px;
+}
+
+/* ==========================================
+   PAGE HEADING
+   ========================================== */
+
+.social-creatives-heading {
+  text-align: center;
+  pointer-events: none;
+}
+
+.social-creatives-eyebrow {
+  color: var(--sc-accent);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+}
+
+.social-creatives-heading h1 {
+  margin: 12px 0 0;
+  color: var(--sc-text);
+
+  font-size: clamp(22px, 2.8vw, 42px);
+  font-weight: 500;
+  letter-spacing: -0.055em;
+  line-height: 1;
+}
+
+.social-creatives-count {
+  flex-shrink: 0;
+  padding-top: 12px;
+
+  color: #898992;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+}
+
+/* ==========================================
+   INFINITE MENU GALLERY
+   ========================================== */
+
+.social-creatives-gallery {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.social-creatives-gallery .infinite-menu {
+  width: 100%;
+  height: 100%;
+  background: var(--sc-bg);
+}
+
+/* ==========================================
+   BOTTOM HINT
+   ========================================== */
+
+.social-creatives-hint {
+  position: absolute;
+  z-index: 25;
+  bottom: 20px;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  color: var(--sc-accent);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-align: center;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* ==========================================
+   EMPTY GALLERY STATE
+   ========================================== */
+
+.social-creatives-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+  padding: 24px;
+  text-align: center;
+}
+
+.social-creatives-empty h2 {
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.social-creatives-empty p {
+  color: #898992;
+  font-size: 13px;
+}
+
+/* ==========================================
+   FULLSCREEN POSTER PREVIEW
+   ========================================== */
+
+.social-creatives-lightbox {
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 24px;
+
+  background: rgba(0, 0, 0, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.social-creatives-lightbox-content {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  max-width: 95vw;
+  max-height: 90dvh;
+}
+
+.social-creatives-lightbox-content > img {
+  display: block;
+  width: auto;
+  height: auto;
+
+  max-width: 90vw;
+  max-height: 85dvh;
+
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+/* ==========================================
+   CUSTOM CLOSE BUTTON
+   Outside poster — top-right of screen
+   ========================================== */
+
+.social-creatives-lightbox-close {
+  position: fixed;
+  z-index: 1010;
+  top: 24px;
+  right: 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 44px;
+  height: 44px;
+  padding: 0;
+
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 50%;
+  background: rgba(16, 16, 16, 0.95);
+
+  color: #ffffff;
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.social-creatives-lightbox-close:hover {
+  background: var(--sc-accent);
+  border-color: var(--sc-accent);
+}
+
+/* Custom SVG close icon */
+.social-creatives-lightbox-close img {
+  display: block;
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  pointer-events: none;
+
+  filter: brightness(0) invert(1);
+}
+
+.social-creatives-lightbox-close:hover img {
+  filter: brightness(0);
+}
+
+.social-creatives-lightbox-close:focus-visible {
+  outline: 2px solid var(--sc-accent);
+  outline-offset: 4px;
+}
+
+/* ==========================================
+   MOBILE RESPONSIVE
+   ========================================== */
+
+@media (max-width: 650px) {
+  .social-creatives-header {
+    flex-wrap: wrap;
+    gap: 18px;
+    padding: 20px 6vw;
+  }
+
+  .social-creatives-back {
+    min-height: 40px;
+    padding: 10px 14px;
+    gap: 8px;
+    font-size: 9px;
+  }
+
+  .social-creatives-back img {
+    width: 15px;
+    height: 15px;
+  }
+
+  .social-creatives-heading {
+    order: 3;
+    flex-basis: 100%;
+    text-align: left;
+  }
+
+  .social-creatives-heading h1 {
+    font-size: 28px;
+  }
+
+  .social-creatives-count {
+    font-size: 9px;
+  }
+
+  .social-creatives-hint {
+    bottom: 22px;
+    max-width: 94vw;
+    font-size: 8px;
+    letter-spacing: 0.1em;
+  }
+
+  .social-creatives-lightbox-close {
+    top: 16px;
+    right: 16px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .social-creatives-lightbox-close img {
+    width: 18px;
+    height: 18px;
+  }
+}

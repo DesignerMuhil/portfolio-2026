@@ -1,0 +1,287 @@
+
+/* COMPARISON SLIDER — FULL VIEW + COMPARE */
+
+.comparison {
+  width: 100%;
+  min-width: 0;
+  color: #17171d;
+}
+
+.comparison *,
+.comparison *::before,
+.comparison *::after {
+  box-sizing: border-box;
+}
+
+.comparison__toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding-bottom: 24px;
+}
+
+.comparison__toolbar-copy > span {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.comparison__toolbar-copy p {
+  margin: 8px 0 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #72727e;
+}
+
+.comparison__modes {
+  display: inline-flex;
+  gap: 0;
+  flex-shrink: 0;
+  padding: 4px;
+  border: 1px solid #dedee5;
+  background: #f6f6f8;
+}
+
+.comparison__modes button {
+  padding: 8px 16px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: #656574;
+  font-family: inherit;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+}
+
+.comparison__modes button.is-active {
+  background: #17171d;
+  color: #ffffff;
+}
+
+.comparison__modes button:focus-visible {
+  outline: 2px solid #8179db;
+  outline-offset: 2px;
+}
+
+/* FULL VIEW */
+
+.comparison__full-view {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: start;
+  gap: 24px;
+}
+
+.comparison__screen {
+  min-width: 0;
+  margin: 0;
+}
+
+.comparison__screen figcaption {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 0 16px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.comparison__status-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: #9b9ba7;
+}
+
+.comparison__status-dot--after {
+  background: #8179db;
+}
+
+.comparison__screen-image {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #dedee5;
+  background: #ffffff;
+}
+
+.comparison__screen-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* COMPARE MODE */
+
+.comparison__compare-view {
+  width: 100%;
+}
+
+.comparison__frame {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid #dedee5;
+  background: #ffffff;
+  cursor: ew-resize;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.comparison__layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.comparison__layer--after {
+  z-index: 1;
+}
+
+.comparison__layer--before {
+  z-index: 2;
+}
+
+.comparison__layer img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.comparison__tag {
+  position: absolute;
+  z-index: 4;
+  top: 16px;
+  padding: 8px 12px;
+  background: #17171d;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  pointer-events: none;
+}
+
+.comparison__tag--before {
+  left: 16px;
+}
+
+.comparison__tag--after {
+  right: 16px;
+}
+
+.comparison__divider {
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #8179db;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.comparison__handle {
+  position: absolute;
+  z-index: 5;
+  top: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 48px;
+  height: 48px;
+  border: 2px solid #a5a0ff;
+  border-radius: 50%;
+  background: #17171d;
+  transform: translate(-50%, -50%);
+  cursor: ew-resize;
+  touch-action: none;
+}
+
+.comparison__handle:focus-visible {
+  outline: 3px solid #8179db;
+  outline-offset: 4px;
+}
+
+.comparison__arrow {
+  display: block;
+  width: 12px;
+  height: 12px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  pointer-events: none;
+}
+
+.comparison__arrow--left {
+  transform: rotate(180deg);
+}
+
+.comparison__hint {
+  margin: 0;
+  padding: 16px 0 0;
+  font-size: 12px;
+  line-height: 1.6;
+  color: #777785;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 800px) {
+  .comparison__full-view {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+@media (max-width: 600px) {
+  .comparison__toolbar {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .comparison__modes {
+    width: 100%;
+  }
+
+  .comparison__modes button {
+    flex: 1;
+  }
+
+  .comparison__tag {
+    top: 8px;
+    padding: 8px;
+    font-size: 9px;
+  }
+
+  .comparison__tag--before {
+    left: 8px;
+  }
+
+  .comparison__tag--after {
+    right: 8px;
+  }
+
+  .comparison__handle {
+    width: 40px;
+    height: 40px;
+  }
+
+  .comparison__arrow {
+    width: 10px;
+    height: 10px;
+  }
+}

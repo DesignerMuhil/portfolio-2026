@@ -1,0 +1,194 @@
+
+/* ======================================
+   SHARED HEADER — HERO + WORK
+====================================== */
+
+.horizontal-page-shell > .portfolio-shared-nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  height: 10%;
+  min-height: 72px;
+  z-index: 80;
+
+  padding-inline: var(--page-padding);
+
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+
+  pointer-events: none;
+
+  --hero-ink: #090909;
+  --hero-muted: rgba(9, 9, 9, 0.48);
+
+  background: rgba(242, 242, 237, 0.76);
+
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+
+  border-bottom: 1px solid rgba(9, 9, 9, 0.07);
+
+  transition:
+    background 350ms ease,
+    border-color 350ms ease;
+}
+
+.portfolio-shared-nav > * {
+  pointer-events: auto;
+}
+
+/* ======================================
+   LOGO
+====================================== */
+
+.portfolio-shared-nav__home {
+  justify-self: start;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.portfolio-shared-nav__home:hover {
+  opacity: 0.8;
+}
+
+.portfolio-shared-nav__home:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 5px;
+}
+
+/* ======================================
+   PORTFOLIO TEXT
+====================================== */
+
+.portfolio-shared-nav .hero__nav-center {
+  justify-self: center;
+  color: rgba(9, 9, 9, 0.42);
+}
+
+/* ======================================
+   WORK DARK THEME
+====================================== */
+
+.horizontal-page-shell
+  > .portfolio-shared-nav--dark {
+  --hero-ink: #f2f2ed;
+  --hero-muted: rgba(242, 242, 237, 0.42);
+
+  background: rgba(16, 16, 16, 0.82);
+
+  border-bottom-color:
+    rgba(242, 242, 237, 0.08);
+}
+
+/* White logo */
+
+.portfolio-shared-nav--dark .hero__brand-logo {
+  filter: invert(1);
+}
+
+/* Subtle portfolio text */
+
+.portfolio-shared-nav--dark .hero__nav-center {
+  color: rgba(242, 242, 237, 0.42);
+}
+
+/* ======================================
+   WORK MENU BUTTON
+====================================== */
+
+.portfolio-shared-nav--dark .tech-button {
+  background: rgba(18, 18, 20, 0.92);
+  border: 1px solid rgba(242, 242, 237, 0.18);
+  color: #f2f2ed;
+}
+
+.portfolio-shared-nav--dark .tech-button:hover {
+  background: rgba(35, 35, 40, 0.96);
+  border-color: rgba(242, 242, 237, 0.4);
+}
+
+/* Light corners */
+
+.portfolio-shared-nav--dark
+.tech-button__corner--tl {
+  border-top-color: #f2f2ed;
+  border-left-color: #f2f2ed;
+}
+
+.portfolio-shared-nav--dark
+.tech-button__corner--tr {
+  border-top-color: #f2f2ed;
+  border-right-color: #f2f2ed;
+}
+
+.portfolio-shared-nav--dark
+.tech-button__corner--bl {
+  border-bottom-color: #f2f2ed;
+  border-left-color: #f2f2ed;
+}
+
+.portfolio-shared-nav--dark
+.tech-button__corner--br {
+  border-bottom-color: #f2f2ed;
+  border-right-color: #f2f2ed;
+}
+
+/* Light icon */
+
+.portfolio-shared-nav--dark .hero__menu-icon {
+  filter: invert(1);
+}
+
+/* ======================================
+   MOBILE
+====================================== */
+
+@media (max-width: 768px) {
+  .horizontal-page-shell > .portfolio-shared-nav {
+    grid-template-columns: 1fr auto;
+    min-height: 66px;
+  }
+
+  .portfolio-shared-nav .hero__nav-center {
+    display: none;
+  }
+}
+
+/* ==========================================
+   SEE-THROUGH FROSTED GLASS HEADER
+========================================== */
+
+/* HERO — transparent light glass */
+.horizontal-page-shell > .portfolio-shared-nav {
+  background: rgba(242, 242, 237, 0.24);
+
+  -webkit-backdrop-filter: blur(24px) saturate(140%);
+  backdrop-filter: blur(24px) saturate(140%);
+
+  border-bottom: 1px solid rgba(9, 9, 9, 0.08);
+}
+
+/* WORK — transparent dark glass */
+.horizontal-page-shell > .portfolio-shared-nav--dark {
+  background: rgba(16, 16, 16, 0.28);
+
+  -webkit-backdrop-filter: blur(24px) saturate(140%);
+  backdrop-filter: blur(24px) saturate(140%);
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Keep MENU dark but let header stay transparent */
+.portfolio-shared-nav--dark .tech-button {
+  background: rgba(18, 18, 20, 0.85);
+}
+
+/* Keep PORTFOLIO subtle */
+.portfolio-shared-nav--dark .hero__nav-center {
+  color: rgba(242, 242, 237, 0.48);
+}

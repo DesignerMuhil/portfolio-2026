@@ -1,0 +1,221 @@
+:root {
+  /* =========================================================
+     COLORS
+  ========================================================= */
+
+  --color-black: #000000;
+  --color-white: #ffffff;
+
+  --color-bg: #050505;
+  --color-surface: #0a0a0a;
+  --color-surface-elevated: #101010;
+
+  --color-text-primary: #f5f5f5;
+  --color-text-secondary: #a3a3a3;
+  --color-text-muted: #666666;
+
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-border-hover: rgba(255, 255, 255, 0.18);
+  --color-border-strong: rgba(255, 255, 255, 0.3);
+
+  --color-accent: #ffffff;
+
+
+  /* =========================================================
+     TYPOGRAPHY
+  ========================================================= */
+
+  /*
+    TITILLIUM WEB
+    Main portfolio / interface typeface
+  */
+
+  --font-body:
+    "Titillium Web",
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
+
+  /*
+    Keep compatibility with existing Hero CSS.
+  */
+
+  --font-sans: var(--font-body);
+
+
+  /*
+    LT WAVE
+    Editorial / expressive accent
+  */
+
+  --font-accent:
+    "LT Wave",
+    Georgia,
+    serif;
+
+
+  /*
+    LT WAVE ALT
+    Experimental Y2K display variant
+  */
+
+  --font-accent-alt:
+    "LT Wave Alt",
+    "LT Wave",
+    sans-serif;
+
+
+  /*
+    LT WAVE MONO
+    Technical metadata / system labels
+  */
+
+  --font-mono:
+    "LT Wave Mono",
+    "SFMono-Regular",
+    Consolas,
+    monospace;
+
+
+  /* =========================================================
+     TYPE SCALE
+
+     Font sizes do NOT need to follow the 8px spacing rule.
+  ========================================================= */
+
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-base: 16px;
+  --text-md: 18px;
+
+  --text-lg: 20px;
+  --text-xl: 24px;
+
+  --text-2xl: 32px;
+  --text-3xl: 44px;
+  --text-4xl: 64px;
+
+  --text-display-sm: clamp(48px, 7vw, 96px);
+  --text-display: clamp(64px, 10vw, 144px);
+  --text-display-lg: clamp(80px, 13vw, 192px);
+
+
+  /* =========================================================
+     FONT WEIGHTS
+  ========================================================= */
+
+  --font-light: 300;
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+  --font-black: 900;
+
+
+  /* =========================================================
+     LINE HEIGHT
+  ========================================================= */
+
+  --leading-none: 1;
+  --leading-tight: 1.1;
+  --leading-snug: 1.25;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.7;
+
+
+  /* =========================================================
+     LETTER SPACING
+  ========================================================= */
+
+  --tracking-tight: -0.04em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.08em;
+  --tracking-wider: 0.14em;
+
+
+  /* =========================================================
+     8PX SPACING SYSTEM
+  ========================================================= */
+
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-5: 40px;
+  --space-6: 48px;
+
+  --space-8: 64px;
+  --space-10: 80px;
+  --space-12: 96px;
+  --space-16: 128px;
+
+  --space-20: 160px;
+  --space-24: 192px;
+  --space-32: 256px;
+  --space-40: 320px;
+
+
+  /* =========================================================
+     LAYOUT — 8PX GRID
+  ========================================================= */
+
+  --container-max: 1440px;
+
+  --page-padding: clamp(24px, 4vw, 64px);
+
+  --section-space: clamp(96px, 12vw, 176px);
+
+
+  /* =========================================================
+     BORDERS
+  ========================================================= */
+
+  --border-width: 1px;
+
+  --radius-xs: 8px;
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+
+  --radius-pill: 999px;
+
+
+  /* =========================================================
+     MOTION
+  ========================================================= */
+
+  --duration-fast: 160ms;
+  --duration-normal: 320ms;
+  --duration-slow: 600ms;
+  --duration-reveal: 900ms;
+
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+
+  /* =========================================================
+     Z INDEX
+  ========================================================= */
+
+  --z-base: 0;
+  --z-content: 10;
+  --z-nav: 100;
+  --z-overlay: 500;
+  --z-modal: 800;
+  --z-loader: 1000;
+  --z-cursor: 1100;
+}
+
+
+/* =========================================================
+   TABLET / MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+  :root {
+    --page-padding: 24px;
+    --section-space: 96px;
+  }
+}

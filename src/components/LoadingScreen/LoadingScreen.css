@@ -1,0 +1,715 @@
+/* =========================================================
+   LOADING SCREEN
+   Minimal / Y2K / Vertical Curtain Reveal
+   ========================================================= */
+
+
+/* =========================================================
+   ROOT
+   ========================================================= */
+
+.loader {
+  position: fixed;
+  inset: 0;
+
+  width: 100%;
+  height: 100dvh;
+
+  overflow: hidden;
+
+  background: #000;
+  color: #fff;
+
+  z-index: var(--z-loader);
+
+  will-change: transform;
+
+  transform: translate3d(0, 0, 0);
+}
+
+
+/* =========================================================
+   PANELS
+
+   We keep the existing JSX structure, but both panels simply
+   act as transparent positioning layers.
+
+   No clipping.
+   No scaling.
+   No movement.
+
+   This restores the original positions of the Y2K elements.
+   ========================================================= */
+
+.loader__panel {
+  position: absolute;
+  inset: 0;
+
+  background: transparent;
+
+  pointer-events: none;
+}
+
+
+/*
+   Both layers cover the complete loader.
+*/
+
+.loader__panel--top,
+.loader__panel--bottom {
+  inset: 0;
+}
+
+
+/* =========================================================
+   CENTER CONTENT
+   ========================================================= */
+
+.loader__center {
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  z-index: 20;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  transform: translate(-50%, -50%);
+
+  color: #fff;
+
+  pointer-events: none;
+
+  transition:
+    opacity 220ms ease,
+    transform 350ms var(--ease-out);
+}
+
+
+/* =========================================================
+   SYSTEM LABEL
+   ========================================================= */
+
+.loader__index {
+  margin-bottom: var(--space-4);
+
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 400;
+
+  line-height: 1;
+
+  letter-spacing: 0.22em;
+
+  color: rgba(255, 255, 255, 0.38);
+
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   LOADING COUNT
+   ========================================================= */
+
+.loader__count {
+  font-family: var(--font-sans);
+
+  font-size: clamp(5.5rem, 13vw, 11rem);
+  font-weight: var(--font-medium);
+
+  line-height: 0.82;
+
+  letter-spacing: -0.065em;
+
+  color: #fff;
+
+  font-variant-numeric: tabular-nums;
+
+  user-select: none;
+}
+
+
+/* =========================================================
+   STATUS
+   ========================================================= */
+
+.loader__status {
+  margin-top: var(--space-6);
+
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 400;
+
+  line-height: 1;
+
+  letter-spacing: 0.2em;
+
+  color: rgba(255, 255, 255, 0.45);
+
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   PROGRESS
+   ========================================================= */
+
+.loader__progress {
+  position: relative;
+
+  width: clamp(130px, 13vw, 190px);
+  height: 1px;
+
+  margin-top: var(--space-5);
+
+  overflow: hidden;
+
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.loader__progress-fill {
+  width: 100%;
+  height: 100%;
+
+  background: #fff;
+
+  transform: scaleX(0);
+  transform-origin: left center;
+
+  transition: transform 90ms linear;
+}
+
+
+/* =========================================================
+   Y2K META
+   Original positioning restored
+   ========================================================= */
+
+.loader__meta {
+  position: absolute;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 5px;
+
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 400;
+
+  line-height: 1.25;
+
+  letter-spacing: 0.14em;
+
+  color: rgba(255, 255, 255, 0.38);
+
+  text-transform: uppercase;
+
+  user-select: none;
+}
+
+
+/* TOP LEFT */
+
+.loader__meta--top-left {
+  top: var(--page-padding);
+  left: var(--page-padding);
+}
+
+
+/* TOP RIGHT */
+
+.loader__meta--top-right {
+  top: var(--page-padding);
+  right: var(--page-padding);
+
+  align-items: flex-end;
+
+  text-align: right;
+}
+
+
+/* BOTTOM LEFT */
+
+.loader__meta--bottom-left {
+  bottom: var(--page-padding);
+  left: var(--page-padding);
+}
+
+
+/* BOTTOM RIGHT */
+
+.loader__meta--bottom-right {
+  right: var(--page-padding);
+  bottom: var(--page-padding);
+
+  align-items: flex-end;
+
+  text-align: right;
+}
+
+
+/* =========================================================
+   Y2K CROSS MARKERS
+   ========================================================= */
+
+.loader__cross {
+  position: absolute;
+
+  font-family: var(--font-mono);
+  font-size: 13px;
+
+  line-height: 1;
+
+  color: rgba(255, 255, 255, 0.28);
+
+  user-select: none;
+}
+
+
+.loader__cross--top {
+  top: 23%;
+  left: 11%;
+}
+
+
+.loader__cross--bottom {
+  right: 12%;
+  bottom: 21%;
+}
+
+
+/* =========================================================
+   Y2K ORBIT
+   ========================================================= */
+
+.loader__orbit {
+  position: absolute;
+
+  width: 34px;
+  height: 34px;
+
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 50%;
+
+  animation: loader-orbit 5s linear infinite;
+}
+
+
+/* Horizontal axis */
+
+.loader__orbit::before {
+  content: "";
+
+  position: absolute;
+
+  top: 50%;
+  left: -6px;
+
+  width: 44px;
+  height: 1px;
+
+  background: rgba(255, 255, 255, 0.2);
+
+  transform: translateY(-50%);
+}
+
+
+/* Vertical axis */
+
+.loader__orbit::after {
+  content: "";
+
+  position: absolute;
+
+  top: -6px;
+  left: 50%;
+
+  width: 1px;
+  height: 44px;
+
+  background: rgba(255, 255, 255, 0.2);
+
+  transform: translateX(-50%);
+}
+
+
+/* Orbit point */
+
+.loader__orbit span {
+  position: absolute;
+
+  top: -2px;
+  left: 50%;
+
+  width: 4px;
+  height: 4px;
+
+  border-radius: 50%;
+
+  background: #fff;
+
+  transform: translateX(-50%);
+}
+
+
+/* ORIGINAL POSITIONS */
+
+.loader__orbit--top {
+  top: 18%;
+  right: 12%;
+}
+
+
+.loader__orbit--bottom {
+  bottom: 17%;
+  left: 13%;
+}
+
+
+/* =========================================================
+   READY STATE
+   ========================================================= */
+
+.loader--ready .loader__count {
+  animation:
+    loader-ready 400ms var(--ease-out);
+}
+
+
+.loader--ready .loader__progress-fill {
+  opacity: 0.45;
+}
+
+
+/* =========================================================
+   OPENING / CURTAIN REVEAL
+
+   Whole black loader moves upward.
+
+              ↑
+              ↑
+        BLACK LOADER
+   ─────────────────────
+          WHITE HERO
+   ========================================================= */
+
+.loader--opening {
+  animation:
+    loader-curtain-up
+    1.05s
+    cubic-bezier(0.76, 0, 0.24, 1)
+    forwards;
+
+  pointer-events: none;
+}
+
+
+/*
+   Keep the center UI visible for the first part of the
+   movement, then gently fade it.
+
+   This makes the loader feel like one complete surface.
+*/
+
+.loader--opening .loader__center {
+  opacity: 0;
+
+  transform:
+    translate(-50%, -65%);
+}
+
+
+/* =========================================================
+   CURTAIN ANIMATION
+   ========================================================= */
+
+@keyframes loader-curtain-up {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(0, -100%, 0);
+  }
+}
+
+
+/* =========================================================
+   READY NUMBER
+   ========================================================= */
+
+@keyframes loader-ready {
+  0% {
+    letter-spacing: -0.065em;
+  }
+
+  50% {
+    letter-spacing: -0.03em;
+  }
+
+  100% {
+    letter-spacing: -0.065em;
+  }
+}
+
+
+/* =========================================================
+   ORBIT
+   ========================================================= */
+
+@keyframes loader-orbit {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+  .loader__count {
+    font-size: clamp(5rem, 27vw, 8rem);
+  }
+
+
+  .loader__index,
+  .loader__status,
+  .loader__meta {
+    font-size: 8px;
+  }
+
+
+  .loader__orbit {
+    width: 28px;
+    height: 28px;
+  }
+
+
+  .loader__orbit::before {
+    left: -5px;
+
+    width: 38px;
+  }
+
+
+  .loader__orbit::after {
+    top: -5px;
+
+    height: 38px;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .loader__orbit {
+    animation: none;
+  }
+
+
+  .loader--ready .loader__count {
+    animation: none;
+  }
+
+
+  .loader--opening {
+    animation:
+      loader-fade
+      250ms
+      ease
+      forwards;
+  }
+}
+
+
+@keyframes loader-fade {
+  to {
+    opacity: 0;
+  }
+}
+
+/* =========================================================
+   ENTER
+   Added to original loader
+========================================================= */
+
+.loader--ready .loader__center {
+  pointer-events: auto;
+}
+
+
+.loader__enter {
+  position: relative;
+
+  width: 160px;
+  height: 48px;
+
+  margin-top: var(--space-4);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border: 0;
+
+  color: #fff;
+  background: transparent;
+
+  cursor: pointer;
+
+  pointer-events: auto;
+
+  opacity: 0;
+
+  transform: translateY(8px);
+
+  animation:
+    loader-enter-reveal
+    500ms
+    var(--ease-out)
+    forwards;
+
+  animation-delay: 120ms;
+}
+
+
+/* ENTER TEXT */
+
+.loader__enter-text {
+  position: relative;
+
+  z-index: 2;
+
+  font-family: var(--font-mono);
+
+  font-size: 10px;
+  font-weight: 400;
+
+  line-height: 1;
+
+  letter-spacing: 0.28em;
+
+  text-indent: 0.28em;
+
+  color:
+    rgba(255, 255, 255, 0.72);
+
+  transition:
+    color 180ms ease,
+    letter-spacing
+    280ms
+    var(--ease-out);
+}
+
+
+/* SMALL LINE */
+
+.loader__enter-line {
+  position: absolute;
+
+  left: 50%;
+  bottom: 4px;
+
+  width: 32px;
+  height: 1px;
+
+  background:
+    rgba(255, 255, 255, 0.28);
+
+  transform:
+    translateX(-50%);
+
+  transition:
+    width 350ms var(--ease-out),
+    background 180ms ease;
+}
+
+
+/* HOVER */
+
+.loader__enter:hover
+.loader__enter-text {
+  color: #fff;
+
+  letter-spacing: 0.34em;
+}
+
+
+.loader__enter:hover
+.loader__enter-line {
+  width: 72px;
+
+  background:
+    rgba(255, 255, 255, 0.8);
+}
+
+
+/* KEYBOARD */
+
+.loader__enter:focus-visible {
+  outline:
+    1px solid
+    rgba(255, 255, 255, 0.55);
+
+  outline-offset: 4px;
+}
+
+
+/* ENTER APPEAR */
+
+@keyframes loader-enter-reveal {
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0);
+  }
+}
+
+
+/* OPENING */
+
+.loader--opening .loader__enter {
+  pointer-events: none;
+}
+
+
+/* REDUCED MOTION */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .loader__enter {
+    opacity: 1;
+
+    transform: none;
+
+    animation: none;
+  }
+
+  .loader__enter-text,
+  .loader__enter-line {
+    transition: none;
+  }
+}

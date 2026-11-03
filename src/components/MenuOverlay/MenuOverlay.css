@@ -1,0 +1,934 @@
+/* =========================================================
+   MENU OVERLAY
+========================================================= */
+
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+
+  z-index: 700;
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   BLURRED HERO BACKDROP
+========================================================= */
+
+.menu-overlay__backdrop {
+  position: absolute;
+  inset: 0;
+
+  z-index: 1;
+
+  width: 100%;
+  height: 100%;
+
+  margin: 0;
+  padding: 0;
+  border: 0;
+
+  background: rgba(0, 0, 0, 0);
+
+  -webkit-backdrop-filter: blur(0);
+  backdrop-filter: blur(0);
+
+  opacity: 0;
+
+  cursor: default;
+
+  transition:
+    background 620ms var(--ease-out),
+    backdrop-filter 620ms var(--ease-out),
+    -webkit-backdrop-filter 620ms var(--ease-out),
+    opacity 620ms var(--ease-out);
+}
+
+
+.menu-overlay--open .menu-overlay__backdrop {
+  pointer-events: auto;
+
+  opacity: 1;
+
+  background: rgba(0, 0, 0, 0.64);
+
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+}
+
+
+.menu-overlay--closing .menu-overlay__backdrop {
+  opacity: 0;
+
+  background: rgba(0, 0, 0, 0);
+
+  -webkit-backdrop-filter: blur(0);
+  backdrop-filter: blur(0);
+
+  transition-delay: 100ms;
+}
+
+
+/* =========================================================
+   LEFT AUDIO / MUSIC AREA
+========================================================= */
+
+.menu-overlay__audio-zone {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+  bottom: 0;
+
+  z-index: 2;
+
+  width: calc(100% - 456px);
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   RIGHT MENU PANEL
+========================================================= */
+
+.menu-panel {
+  position: absolute;
+
+  top: 0;
+  right: 0;
+  bottom: 0;
+
+  z-index: 10;
+
+  width: 456px;
+  max-width: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 32px;
+
+  overflow: hidden;
+
+  background: #050505;
+  color: #f2f2ed;
+
+  border-left:
+    1px solid rgba(255, 255, 255, 0.1);
+
+  transform: translate3d(100%, 0, 0);
+
+  will-change: transform;
+
+  pointer-events: auto;
+
+  transition:
+    transform 720ms cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+
+.menu-overlay--open .menu-panel {
+  transform: translate3d(0, 0, 0);
+}
+
+
+.menu-overlay--closing .menu-panel {
+  transform: translate3d(100%, 0, 0);
+}
+
+
+/* =========================================================
+   SUBTLE BACKGROUND GRID
+========================================================= */
+
+.menu-panel::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  z-index: -1;
+
+  pointer-events: none;
+
+  background-image:
+    linear-gradient(
+      rgba(255, 255, 255, 0.018) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.018) 1px,
+      transparent 1px
+    );
+
+  background-size: 64px 64px;
+
+  opacity: 0.55;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.menu-panel__header {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  min-height: 48px;
+
+  flex: 0 0 auto;
+
+  opacity: 0;
+  transform: translateY(-12px);
+
+  transition:
+    opacity 440ms var(--ease-out),
+    transform 440ms var(--ease-out);
+}
+
+
+.menu-overlay--open .menu-panel__header {
+  opacity: 1;
+
+  transform: translateY(0);
+
+  transition-delay: 160ms;
+}
+
+
+.menu-panel__eyebrow {
+  color: rgba(242, 242, 237, 0.48);
+
+  font-family: var(--font-mono);
+
+  font-size: 9px;
+  font-weight: 500;
+
+  letter-spacing: 0.16em;
+}
+
+
+/* =========================================================
+   CLOSE BUTTON
+========================================================= */
+
+.menu-close {
+  position: relative;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 16px;
+
+  min-width: 120px;
+  height: 48px;
+
+  padding: 0 16px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.1);
+
+  background:
+    rgba(255, 255, 255, 0.035);
+
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+
+  color: #f2f2ed;
+
+  font-family: var(--font-mono);
+
+  font-size: 9px;
+  font-weight: 500;
+
+  letter-spacing: 0.14em;
+
+  cursor: pointer;
+
+  transition:
+    background 280ms var(--ease-out),
+    border-color 280ms var(--ease-out),
+    transform 280ms var(--ease-out);
+}
+
+
+.menu-close:hover {
+  background:
+    rgba(255, 255, 255, 0.075);
+
+  border-color:
+    rgba(255, 255, 255, 0.22);
+}
+
+
+.menu-close:active {
+  transform: scale(0.97);
+}
+
+
+.menu-close__label {
+  position: relative;
+
+  z-index: 1;
+}
+
+
+/* =========================================================
+   REAL CLOSE SVG ICON
+========================================================= */
+
+.menu-close__icon {
+  display: block;
+
+  width: 14px;
+  height: 14px;
+
+  flex: 0 0 auto;
+
+  object-fit: contain;
+
+  /*
+   * Your SVG is black.
+   * Invert makes it white/off-white on dark background.
+   */
+  filter: invert(1);
+
+  opacity: 0.72;
+
+  transition:
+    opacity 280ms var(--ease-out),
+    transform 500ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+
+.menu-close:hover .menu-close__icon {
+  opacity: 1;
+
+  transform: rotate(90deg);
+}
+
+
+/* =========================================================
+   CLOSE CORNERS
+========================================================= */
+
+.menu-close__corner {
+  position: absolute;
+
+  width: 8px;
+  height: 8px;
+
+  pointer-events: none;
+
+  transition:
+    width 420ms cubic-bezier(0.16, 1, 0.3, 1),
+    height 420ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+
+.menu-close__corner--tl {
+  top: -4px;
+  left: -4px;
+
+  border-top: 1px solid currentColor;
+  border-left: 1px solid currentColor;
+}
+
+
+.menu-close__corner--tr {
+  top: -4px;
+  right: -4px;
+
+  border-top: 1px solid currentColor;
+  border-right: 1px solid currentColor;
+}
+
+
+.menu-close__corner--bl {
+  bottom: -4px;
+  left: -4px;
+
+  border-bottom: 1px solid currentColor;
+  border-left: 1px solid currentColor;
+}
+
+
+.menu-close__corner--br {
+  right: -4px;
+  bottom: -4px;
+
+  border-right: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
+}
+
+
+.menu-close:hover .menu-close__corner {
+  width: 14px;
+  height: 14px;
+}
+
+
+.menu-close:hover .menu-close__corner--tl {
+  transform: translate(3px, 3px);
+}
+
+
+.menu-close:hover .menu-close__corner--tr {
+  transform: translate(-3px, 3px);
+}
+
+
+.menu-close:hover .menu-close__corner--bl {
+  transform: translate(3px, -3px);
+}
+
+
+.menu-close:hover .menu-close__corner--br {
+  transform: translate(-3px, -3px);
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+.menu-panel__nav {
+  display: flex;
+  flex-direction: column;
+
+  margin-top: 64px;
+
+  flex: 0 0 auto;
+
+  border-top:
+    1px solid rgba(255, 255, 255, 0.08);
+}
+
+
+/* =========================================================
+   NAV ITEM
+========================================================= */
+
+.menu-nav-item {
+  --menu-delay: 0ms;
+
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  min-height: 64px;
+
+  padding: 0 16px;
+
+  color:
+    rgba(242, 242, 237, 0.72);
+
+  border-bottom:
+    1px solid rgba(255, 255, 255, 0.08);
+
+  text-decoration: none;
+
+  opacity: 0;
+
+  transform: translateY(16px);
+
+  transition:
+    opacity 440ms var(--ease-out),
+    transform 440ms var(--ease-out),
+    color 160ms var(--ease-out),
+    background 160ms var(--ease-out);
+}
+
+
+.menu-overlay--open .menu-nav-item {
+  opacity: 1;
+
+  transform: translateY(0);
+
+  transition-delay:100ms;
+}
+
+
+.menu-nav-item__label {
+  font-family: var(--font-sans);
+
+  font-size: 32px;
+  font-weight: 400;
+
+  line-height: 1;
+
+  letter-spacing: -0.035em;
+
+  transition:
+    transform 200ms var(--ease-out),
+    letter-spacing 200ms var(--ease-out);
+}
+
+
+/* NAV HOVER */
+
+.menu-nav-item:hover {
+  color: #090909;
+
+  background: #f2f2ed;
+
+  transition-delay: 0ms;
+}
+
+
+.menu-nav-item:hover .menu-nav-item__label {
+  transform: translateX(8px);
+}
+
+
+/* =========================================================
+   BOTTOM AREA
+========================================================= */
+
+.menu-panel__bottom {
+  margin-top: auto;
+
+  flex: 0 0 auto;
+}
+
+
+/* =========================================================
+   CONNECT
+========================================================= */
+
+.menu-panel__connect {
+  width: 100%;
+}
+
+
+.menu-panel__section-heading {
+  margin-bottom: 16px;
+
+  color:
+    rgba(242, 242, 237, 0.4);
+
+  font-family: var(--font-mono);
+
+  font-size: 9px;
+  font-weight: 500;
+
+  letter-spacing: 0.16em;
+
+  opacity: 0;
+
+  transform: translateY(8px);
+
+  transition:
+    opacity 400ms var(--ease-out),
+    transform 400ms var(--ease-out);
+}
+
+
+.menu-overlay--open
+.menu-panel__section-heading {
+  opacity: 1;
+
+  transform: translateY(0);
+
+  transition-delay: 420ms;
+}
+
+
+/* =========================================================
+   CONNECT GRID
+========================================================= */
+
+.menu-panel__socials {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  border-top:
+    1px solid rgba(255, 255, 255, 0.1);
+}
+
+
+/* =========================================================
+   CONNECT ITEM
+========================================================= */
+
+.menu-social {
+  --social-delay: 0ms;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  min-width: 0;
+  height: 56px;
+
+  padding: 0 16px;
+
+  color:
+    rgba(242, 242, 237, 0.66);
+
+  border-bottom:
+    1px solid rgba(255, 255, 255, 0.1);
+
+  text-decoration: none;
+
+  opacity: 0;
+
+  transform: translateY(8px);
+
+  transition:
+    opacity 400ms var(--ease-out),
+    transform 400ms var(--ease-out),
+    color 160ms var(--ease-out),
+    background 160ms var(--ease-out);
+}
+
+
+/* DIVIDER BETWEEN LEFT / RIGHT COLUMN */
+
+.menu-social:nth-child(odd) {
+  border-right:
+    1px solid rgba(255, 255, 255, 0.1);
+}
+
+
+/* SOCIAL STAGGER */
+
+.menu-overlay--open .menu-social {
+  opacity: 1;
+
+  transform: translateY(0);
+
+  transition-delay:
+    100ms;
+}
+
+
+/* =========================================================
+   SOCIAL LABEL
+========================================================= */
+
+.menu-social__label {
+  min-width: 0;
+
+  color: inherit;
+
+  font-family: var(--font-mono);
+
+  font-size: 9px;
+  font-weight: 500;
+
+  letter-spacing: 0.1em;
+
+  white-space: nowrap;
+
+  transition:
+    transform 180ms var(--ease-out);
+}
+
+
+/* =========================================================
+   REAL SVG SOCIAL ICONS
+========================================================= */
+
+.menu-social__icon {
+  display: block;
+
+  width: 16px;
+  height: 16px;
+
+  flex: 0 0 auto;
+
+  margin-left: 16px;
+
+  object-fit: contain;
+
+  /*
+   * BLACK SVG -> WHITE SVG
+   * This makes your black icons visible
+   * on the dark menu.
+   */
+  filter: invert(1);
+
+  opacity: 0.68;
+
+  transition:
+    opacity 160ms var(--ease-out),
+    transform 180ms var(--ease-out),
+    filter 160ms var(--ease-out);
+}
+
+
+/* =========================================================
+   SOCIAL HOVER
+========================================================= */
+
+.menu-social:hover {
+  color: #090909;
+
+  background: #f2f2ed;
+
+  transition-delay: 0ms;
+}
+
+
+.menu-social:hover .menu-social__label {
+  transform: translateX(4px);
+}
+
+
+.menu-social:hover .menu-social__icon {
+  /*
+   * Light background on hover,
+   * so icon goes back to black.
+   */
+  filter: invert(0);
+
+  opacity: 1;
+
+  transform: translateX(-2px);
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.menu-panel__footer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  margin-top: 24px;
+
+  padding-top: 16px;
+
+  border-top:
+    1px solid rgba(255, 255, 255, 0.08);
+
+  color:
+    rgba(242, 242, 237, 0.3);
+
+  font-family: var(--font-mono);
+
+  font-size: 8px;
+
+  letter-spacing: 0.1em;
+
+  opacity: 0;
+
+  transform: translateY(8px);
+
+  transition:
+    opacity 400ms var(--ease-out),
+    transform 400ms var(--ease-out);
+}
+
+
+.menu-panel__footer > div {
+  display: flex;
+  flex-direction: column;
+
+  gap: 4px;
+}
+
+
+.menu-panel__footer > div:last-child {
+  align-items: flex-end;
+}
+
+
+.menu-overlay--open
+.menu-panel__footer {
+  opacity: 1;
+
+  transform: translateY(0);
+
+  transition-delay: 600ms;
+}
+
+
+/* =========================================================
+   CLOSING ANIMATION
+========================================================= */
+
+.menu-overlay--closing .menu-panel__header,
+.menu-overlay--closing .menu-nav-item,
+.menu-overlay--closing .menu-panel__section-heading,
+.menu-overlay--closing .menu-social,
+.menu-overlay--closing .menu-panel__footer {
+  opacity: 0;
+
+  transform: translateY(8px);
+
+  transition-delay: 0ms;
+
+  transition-duration: 180ms;
+}
+
+
+/* =========================================================
+   SHORT DESKTOP HEIGHT
+========================================================= */
+
+@media (max-height: 820px) and (min-width: 641px) {
+
+  .menu-panel {
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+
+  .menu-panel__nav {
+    margin-top: 40px;
+  }
+
+  .menu-nav-item {
+    min-height: 56px;
+  }
+
+  .menu-nav-item__label {
+    font-size: 28px;
+  }
+
+  .menu-panel__section-heading {
+    margin-bottom: 8px;
+  }
+
+  .menu-social {
+    height: 48px;
+  }
+
+  .menu-panel__footer {
+    margin-top: 16px;
+
+    padding-top: 8px;
+  }
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .menu-panel {
+    width: 400px;
+
+    padding: 24px;
+  }
+
+  .menu-overlay__audio-zone {
+    width: calc(100% - 400px);
+  }
+
+  .menu-panel__nav {
+    margin-top: 48px;
+  }
+
+  .menu-nav-item__label {
+    font-size: 28px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 640px) {
+
+  .menu-panel {
+    width: calc(100% - 32px);
+
+    padding: 24px;
+
+    overflow-y: auto;
+
+    overscroll-behavior: contain;
+  }
+
+  .menu-overlay__audio-zone {
+    display: none;
+  }
+
+  .menu-panel__nav {
+    margin-top: 48px;
+  }
+
+  .menu-nav-item {
+    min-height: 56px;
+  }
+
+  .menu-nav-item__label {
+    font-size: 26px;
+  }
+
+  .menu-panel__bottom {
+    margin-top: 64px;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 420px) {
+
+  .menu-panel {
+    width: 100%;
+
+    border-left: 0;
+  }
+
+  .menu-panel__nav {
+    margin-top: 40px;
+  }
+
+  .menu-nav-item__label {
+    font-size: 24px;
+  }
+
+  .menu-panel__socials {
+    grid-template-columns: 1fr;
+  }
+
+  .menu-social:nth-child(odd) {
+    border-right: 0;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .menu-overlay__backdrop,
+  .menu-panel,
+  .menu-panel__header,
+  .menu-nav-item,
+  .menu-panel__section-heading,
+  .menu-social,
+  .menu-panel__footer,
+  .menu-close,
+  .menu-close__corner,
+  .menu-close__icon,
+  .menu-social__icon {
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+  }
+}
