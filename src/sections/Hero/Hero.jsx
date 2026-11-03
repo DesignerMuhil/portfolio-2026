@@ -1,6 +1,6 @@
 
 import "./Hero.css";
-import portrait from "../../assets/profile-pic.png";
+import portrait from "../../assets/profile-pic.webp";
 
 const Hero = () => {
   return (

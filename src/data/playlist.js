@@ -14,7 +14,7 @@ import cover02 from "../assets/audio/covers/cover-02.jpg";
 import cover03 from "../assets/audio/covers/cover-03.jpg";
 import cover04 from "../assets/audio/covers/cover-04.jpg";
 import cover05 from "../assets/audio/covers/cover-05.jpg";
-import cover06 from "../assets/audio/covers/cover-06.jpg";
+import cover06 from "../assets/audio/covers/cover-06.webp";
 import cover07 from "../assets/audio/covers/cover-07.jpg";
 import cover08 from "../assets/audio/covers/cover-08.jpg";
 import cover09 from "../assets/audio/covers/cover-09.jpg";

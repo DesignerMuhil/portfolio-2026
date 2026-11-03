@@ -6,19 +6,19 @@ import SiteFooter from "../../components/SiteFooter/SiteFooter";
 import nextIcon from "../../assets/icons/next.svg";
 import linkedinIcon from "../../assets/icons/linkedin.svg";
 import instagramIcon from "../../assets/icons/instagram.svg";
-import brandOSThumbnail from "../../assets/thumbnail/BrandOS.png";
-import codingalThumbnail from "../../assets/thumbnail/Codingal.png";
-import tripGenieThumbnail from "../../assets/thumbnail/TripGenie.png";
-import dirttRiotThumbnail from "../../assets/thumbnail/DirtRiot.png";
-import sdreamThumbnail from "../../assets/thumbnail/Sdream.png";
-import SpendlyThumbnail from "../../assets/thumbnail/Spendly[V1].png";
-import FlowpilotThumbnail from "../../assets/thumbnail/FlowPiolet.png";
-import auraNestThumbnail from "../../assets/thumbnail/AuraNest.png";
-import withLuvThumbnail from "../../assets/thumbnail/withLuv.png";
-import portfolio2024Thumbnail from "../../assets/thumbnail/Portfolio(2024).png";
-import SocialThumbnail from "../../assets/thumbnail/Socials.png";
-import JuristbotThumbnail from "../../assets/thumbnail/Juristbot.png";
-import DiginestThumbnail from "../../assets/thumbnail/Diginest.png";
+import brandOSThumbnail from "../../assets/thumbnail/BrandOS.webp";
+import codingalThumbnail from "../../assets/thumbnail/Codingal.webp";
+import tripGenieThumbnail from "../../assets/thumbnail/TripGenie.webp";
+import dirttRiotThumbnail from "../../assets/thumbnail/DirtRiot.webp";
+import sdreamThumbnail from "../../assets/thumbnail/Sdream.webp";
+import SpendlyThumbnail from "../../assets/thumbnail/Spendly[V1].webp";
+import FlowpilotThumbnail from "../../assets/thumbnail/FlowPiolet.webp";
+import auraNestThumbnail from "../../assets/thumbnail/AuraNest.webp";
+import withLuvThumbnail from "../../assets/thumbnail/withLuv.webp";
+import portfolio2024Thumbnail from "../../assets/thumbnail/Portfolio(2024).webp";
+import SocialThumbnail from "../../assets/thumbnail/Socials.webp";
+import JuristbotThumbnail from "../../assets/thumbnail/Juristbot.webp";
+import DiginestThumbnail from "../../assets/thumbnail/Diginest.webp";
 
 
 /*
