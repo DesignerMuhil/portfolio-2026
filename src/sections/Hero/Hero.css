@@ -1189,7 +1189,7 @@
 
   .hero__quote-display {
     font-size: clamp(24px, 7.6vw, 36px);
-    line-height: 0.95;
+    line-height: 1.1;
     letter-spacing: -0.06em;
 
     white-space: normal;
@@ -1214,14 +1214,16 @@
     width: 38vw;
     margin: 0;
 
-    font-size: clamp(9px, 2.6vw, 11px);
+    font-size: clamp(12px, 2.6vw, 14px);
     line-height: 1.55;
   }
 
   /* ---------- NAME sits behind the bigger portrait ---------- */
   .hero__name {
-    bottom: 8%;
+    bottom: 10%;
+    left: -10%;
     z-index: 4;
+    rotate: -90deg;
   }
 }
 
