@@ -27,13 +27,14 @@ import gitIcon from "../../assets/icons/git.svg";
 import chatgptIcon from "../../assets/icons/chatgpt.svg";
 import perplexityIcon from "../../assets/icons/perplexity.svg";
 import vscodeIcon from "../../assets/icons/visual-studio-code.svg";
+   import bento1 from "../../assets/bento/bento-1.jpg";
+   import bento2 from "../../assets/bento/bento-2.jpg";
+   import bento3 from "../../assets/bento/bento-3.jpg";
 
 /* BENTO IMAGES — put your photos in src/assets/bento/, then
    uncomment the imports and use them in PROCESS below.
 
-   import bento1 from "../../assets/bento/bento-1.jpg";
-   import bento2 from "../../assets/bento/bento-2.jpg";
-   import bento3 from "../../assets/bento/bento-3.jpg";
+
 */
 
 /* Keep this import last so About.css wins over component CSS */
@@ -84,7 +85,7 @@ const PROCESS = [
     tone: "dark",
     text: "I start with the people and the problem: who this is for, and what they are trying to get done.",
   },
-  { kind: "image", image: null, alt: "" }, /* image: bento1 */
+  { kind: "image", image: bento1, alt: "" }, /* image: bento1 */
   {
     kind: "step",
     no: "02",
@@ -92,7 +93,7 @@ const PROCESS = [
     tone: "accent",
     text: "I turn what I learn into a clear problem statement, so everyone agrees on what to solve.",
   },
-  { kind: "image", image: null, alt: "" }, /* image: bento2 */
+  { kind: "image", image: bento2, alt: "" }, /* image: bento2 */
   {
     kind: "step",
     no: "03",
@@ -109,13 +110,13 @@ const PROCESS = [
     wide: true,
     text: "I test with real users, fix what confuses them, and repeat until the flow feels easy.",
   },
-  { kind: "image", image: null, alt: "" }, /* image: bento3 */
+  { kind: "image", image: bento3, alt: "" }, /* image: bento3 */
 ];
 
 /* TECH STACK
    Each tool has an `icon` field (imported at the top).
    `null` shows an empty square placeholder. */
-
+  
 const STACK_INTRO =
   "I pick tools for the job, not the trend. Figma for interface work, Photoshop for visual exploration, Miro for thinking together, Maze to test, and Claude to move faster. Each one supports how I think and design.";
 

@@ -15,6 +15,9 @@ import About from "./pages/About/About";
 import useInterfaceSounds from "./hooks/useInterfaceSounds";
 import useMusicPlayer from "./hooks/useMusicPlayer";
 
+import useDocumentTitle from "./hooks/useDocumentTitle";
+import TITLES from "./config/pageTitles";
+
 const PROJECT_ROUTES = [
   "/projects/juristbot",
   "/projects/diginest",
@@ -43,6 +46,18 @@ function App() {
   const isSocialCreatives = normalizedPath === "/projects/social-creatives";
   const isAbout = normalizedPath === "/about";
   const isProjectPage = isJuristBot || isDiginest|| isAbout;
+  
+    const routeTitle = isJuristBot
+    ? TITLES.juristbot
+    : isDiginest
+      ? TITLES.diginest
+      : isSocialCreatives
+        ? TITLES.socialCreatives
+        : isAbout
+          ? TITLES.about
+          : undefined;
+
+  useDocumentTitle(routeTitle);
 
   const handleEnterPortfolio = () => {
     musicPlayer.startMusic();

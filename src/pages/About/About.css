@@ -980,13 +980,58 @@
     min-height: 200px;
   }
 
+  /* Grid instead of flex-wrap: the icon sits in its own column and the
+     name, description and category tag all share ONE left edge. */
   .about-stack-row {
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 48px minmax(0, 1fr);
+    grid-template-areas:
+      "icon body"
+      "icon tag";
+    column-gap: var(--s-2);
+    row-gap: 12px;
+    align-items: start;
   }
 
-  .about-stack-row__tag {
-    flex-basis: 100%;
+  .about-stack-row > .about-icon {
+    grid-area: icon;
+  }
 
-    padding-left: 72px;
+  .about-icon--lg {
+    flex-basis: 48px;
+
+    width: 48px;
+    height: 48px;
+
+    border-radius: 10px;
+  }
+
+  .about-stack-row__body {
+    grid-area: body;
+  }
+
+  .about-stack-row__name {
+    font-size: 18px;
+  }
+
+  .about-stack-row__text {
+    max-width: none;
+
+    font-size: 15px;
+  }
+
+  /* category (Design, Collaboration, ...) as a pill, left aligned */
+  .about-stack-row__tag {
+    grid-area: tag;
+    justify-self: start;
+
+    padding: 6px 12px;
+
+    border: 1px solid rgba(9, 9, 9, 0.18);
+    border-radius: 999px;
+
+    font-size: 13px;
+    line-height: 1.2;
+    white-space: nowrap;
   }
 }

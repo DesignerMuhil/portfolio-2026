@@ -6,6 +6,9 @@ import MenuOverlay from "../MenuOverlay/MenuOverlay";
 import menuIcon from "../../assets/icons/menu.svg";
 import logo from "../../assets/branding/logo.svg";
 
+import useDocumentTitle from "../../hooks/useDocumentTitle";
+import TITLES from "../../config/pageTitles";
+
 /* ======================================
    ORIGINAL SCROLL SETTINGS
 ====================================== */
@@ -710,6 +713,7 @@ export default function HorizontalPage({ children }) {
   }, []);
 
   const showWork = progress >= 0.5;
+    useDocumentTitle(showWork ? TITLES.work : TITLES.hero);
   const musicPlayer = hero?.props?.musicPlayer;
   const returnToHero = () => {
     setMenuOpen(false);

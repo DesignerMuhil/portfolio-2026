@@ -7,7 +7,15 @@ import {
 
 import playlist from "../data/playlist";
 
-const INITIAL_VOLUME = 0.05;
+/* Default volume: 3% on mobile, 5% on larger screens */
+const MOBILE_VOLUME = 0.03;
+const DESKTOP_VOLUME = 0.05;
+
+const INITIAL_VOLUME =
+  typeof window !== "undefined" &&
+  window.matchMedia("(max-width: 768px)").matches
+    ? MOBILE_VOLUME
+    : DESKTOP_VOLUME;
 
 const useMusicPlayer = () => {
   const audioRef = useRef(null);

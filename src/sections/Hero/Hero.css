@@ -993,7 +993,7 @@
 @media (max-width: 480px) {
   .tech-button {
     min-width: 94px;
-    height: 42px;
+    height: 44px; /* minimum comfortable touch target */
   }
 
   .hero__role-secondary {
