@@ -1134,3 +1134,119 @@
   object-fit: contain;
   object-position: center bottom;
 }
+
+/* =========================================================
+   MOBILE HERO OVERRIDE  (<= 768px ONLY — desktop untouched)
+   Keep this block at the very END of the file so it wins
+   over the unscoped "NO FOOTER" / "BIGGER PORTRAIT" rules.
+   Tune the 4 variables below to nudge the layout.
+========================================================= */
+
+@media (max-width: 768px) {
+  .hero {
+    --m-portrait-w: 142vw;   /* bigger = larger portrait            */
+    --m-portrait-x: 61%;     /* horizontal centre of the portrait   */
+    --m-statement-top: 25%;  /* vertical position of the quote      */
+    --m-statement-w: 54vw;   /* width of the quote block            */
+  }
+
+  /* ---------- PORTRAIT: bigger, pushed right ---------- */
+  .hero__portrait {
+    left: var(--m-portrait-x);
+    right: auto;
+    bottom: 0;
+
+    width: var(--m-portrait-w);
+    height: 92%;
+
+    transform: translateX(-50%);
+  }
+
+  .hero__portrait img {
+    object-fit: contain;
+    object-position: center bottom;
+  }
+
+  /* ---------- QUOTE: hugging the right side of the portrait ---------- */
+  .hero__statement {
+    top: var(--m-statement-top);
+    right: var(--page-padding);
+    left: auto;
+
+    width: var(--m-statement-w);
+
+    z-index: 25;
+  }
+
+  .hero__statement-index {
+    text-align: right;
+  }
+
+  .hero__statement-main {
+    align-items: flex-end;   /* right-align both lines */
+    text-align: right;
+  }
+
+  .hero__quote-display {
+    font-size: clamp(24px, 7.6vw, 36px);
+    line-height: 0.95;
+    letter-spacing: -0.06em;
+
+    white-space: normal;
+    text-wrap: balance;
+  }
+
+  .hero__quote-hard {
+    margin-top: 10px;
+    margin-left: 0;
+
+    font-size: clamp(30px, 9.6vw, 46px);
+    letter-spacing: -0.05em;
+
+    white-space: nowrap;
+  }
+
+  /* ---------- DESCRIPTION: stay clear of the face ---------- */
+  .hero__statement-description {
+    left: var(--page-padding);
+    bottom: 40%;
+
+    width: 38vw;
+    margin: 0;
+
+    font-size: clamp(9px, 2.6vw, 11px);
+    line-height: 1.55;
+  }
+
+  /* ---------- NAME sits behind the bigger portrait ---------- */
+  .hero__name {
+    bottom: 8%;
+    z-index: 4;
+  }
+}
+
+/* Very small phones (<= 360px) */
+@media (max-width: 360px) {
+  .hero {
+    --m-portrait-w: 150vw;
+    --m-statement-w: 58vw;
+  }
+}
+
+/* Phones in landscape — don't let the portrait balloon */
+@media (max-width: 900px) and (orientation: landscape) and (max-height: 500px) {
+  .hero {
+    --m-portrait-w: 62vw;
+    --m-portrait-x: 66%;
+    --m-statement-top: 20%;
+    --m-statement-w: 34vw;
+  }
+
+  .hero__portrait {
+    height: 100%;
+  }
+
+  .hero__statement-description {
+    display: none;
+  }
+}
