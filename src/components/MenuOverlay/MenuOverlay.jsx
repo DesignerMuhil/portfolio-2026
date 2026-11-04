@@ -53,7 +53,7 @@ const SOCIAL_ITEMS = [
   },
   {
     label: "LINKEDIN",
-    href: "https://www.linkedin.com/in/muhilarasan-m-a65b022a8",
+    href: "https://www.linkedin.com/in/muhilarasan-manivannan-a65b022a8/",
     external: true,
   },
 ];
