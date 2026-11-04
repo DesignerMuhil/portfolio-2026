@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import "./LoadingScreen.css";
 
 const LoadingScreen = ({ onEnter, onComplete }) => {
@@ -6,6 +6,29 @@ const LoadingScreen = ({ onEnter, onComplete }) => {
   const [phase, setPhase] = useState("loading");
 
   const exitTimeoutRef = useRef(null);
+
+  /*
+   * Phones and tablets (touch is the main input) go straight in
+   * once loading reaches 100. Desktop waits for ENTER.
+   */
+  const [autoEnter] = useState(
+    () =>
+      typeof window !== "undefined" &&
+      window.matchMedia?.("(hover: none) and (pointer: coarse)")
+        .matches === true
+  );
+
+  /* Guards against double triggers (key + click + auto) */
+  const enteredRef = useRef(false);
+
+  /* Always call the latest props without re-running effects */
+  const onEnterRef = useRef(onEnter);
+  const onCompleteRef = useRef(onComplete);
+
+  useEffect(() => {
+    onEnterRef.current = onEnter;
+    onCompleteRef.current = onComplete;
+  });
 
   /* =========================================================
      LOADING
@@ -64,13 +87,20 @@ const LoadingScreen = ({ onEnter, onComplete }) => {
      ENTER
   ========================================================= */
 
-  const handleEnter = () => {
-    if (phase !== "ready") return;
+  const enter = useCallback(() => {
+    if (enteredRef.current) return;
+
+    enteredRef.current = true;
 
     /*
-     * Starts music from the real user interaction.
+     * Starts music. With a click or key press this is allowed.
+     * On touch devices (auto enter) the browser may block audio.
      */
-    onEnter?.();
+    try {
+      Promise.resolve(onEnterRef.current?.()).catch(() => {});
+    } catch {
+      /* ignore */
+    }
 
     /*
      * Start existing vertical curtain animation.
@@ -80,11 +110,55 @@ const LoadingScreen = ({ onEnter, onComplete }) => {
     /*
      * Existing curtain = 1.05s.
      */
-    exitTimeoutRef.current =
-      setTimeout(() => {
-        onComplete?.();
-      }, 1100);
-  };
+    exitTimeoutRef.current = setTimeout(() => {
+      onCompleteRef.current?.();
+    }, 1100);
+  }, []);
+
+  /* =========================================================
+     KEYBOARD: the Enter key works like the ENTER button
+  ========================================================= */
+
+  useEffect(() => {
+    if (phase !== "ready" || autoEnter) return undefined;
+
+    const handleKeyDown = (event) => {
+      if (event.key !== "Enter" || event.repeat) return;
+
+      if (
+        event.ctrlKey ||
+        event.metaKey ||
+        event.altKey ||
+        event.shiftKey
+      ) {
+        return;
+      }
+
+      event.preventDefault();
+      enter();
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [phase, autoEnter, enter]);
+
+  /* =========================================================
+     TOUCH DEVICES: continue automatically at 100
+  ========================================================= */
+
+  useEffect(() => {
+    if (phase !== "ready" || !autoEnter) return undefined;
+
+    /* Short pause so 100% / SYSTEM READY is seen */
+    const timer = setTimeout(enter, 600);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [phase, autoEnter, enter]);
 
   /* =========================================================
      CLEANUP
@@ -113,7 +187,6 @@ const LoadingScreen = ({ onEnter, onComplete }) => {
     <div
       className={`loader loader--${phase}`}
       aria-label="Loading portfolio"
-      aria-live="polite"
     >
       {/* ================= TOP ================= */}
 
@@ -181,11 +254,11 @@ const LoadingScreen = ({ onEnter, onComplete }) => {
           SYSTEM / LOAD
         </span>
 
-        <div className="loader__count">
+        <div className="loader__count" aria-hidden="true">
           {formattedProgress}%
         </div>
 
-        <div className="loader__status">
+        <div className="loader__status" aria-live="polite">
           {isLoading
             ? "INITIALIZING"
             : "SYSTEM READY"}
@@ -204,15 +277,16 @@ const LoadingScreen = ({ onEnter, onComplete }) => {
 
         {/* ================= ENTER ================= */}
 
-        {isReady && (
+        {isReady && !autoEnter && (
           <button
             className="loader__enter"
             type="button"
-            onClick={handleEnter}
+            onClick={enter}
             data-sound="both"
+            aria-keyshortcuts="Enter"
           >
             <span className="loader__enter-text">
-              ENTER
+              PRESS ENTER
             </span>
 
             <span

@@ -8,8 +8,8 @@ import {
 import playlist from "../data/playlist";
 
 /* Default volume: 3% on mobile, 5% on larger screens */
-const MOBILE_VOLUME = 0.03;
-const DESKTOP_VOLUME = 0.05;
+const MOBILE_VOLUME = 0.00;
+const DESKTOP_VOLUME = 0.01;
 
 /* Music is desktop-only: disabled on tablets and phones (<= 1024px) */
 const NO_MUSIC_QUERY = "(max-width: 1024px)";
