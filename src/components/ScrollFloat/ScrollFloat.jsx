@@ -60,7 +60,8 @@ const ScrollFloat = ({
   stagger = 0.03,
   distance = 120,
   stretch = 2.3,
-  smoothing = 0
+  smoothing = 0,
+  playOnEnter = false
 }) => {
   const containerRef = useRef(null);
   const textRef = useRef(null);
@@ -132,13 +133,27 @@ const ScrollFloat = ({
 
     mm.add('(prefers-reduced-motion: no-preference)', () => {
       const timeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: el,
-          scroller,
-          start: scrollStart,
-          end: clampToScroll(scrollEnd),
-          scrub: smoothing > 0 ? smoothing : true,
-          invalidateOnRefresh: true
+        scrollTrigger: playOnEnter
+          ? {
+              trigger: el,
+              scroller,
+              start: 'top 92%',
+              once: true,
+              toggleActions: 'play none none none'
+            }
+          : {
+              trigger: el,
+              scroller,
+              start: scrollStart,
+              end: clampToScroll(scrollEnd),
+              scrub: smoothing > 0 ? smoothing : true,
+              invalidateOnRefresh: true
+            },
+        onComplete: () => {
+          /* Play-on-enter finished: drop every inline style so nothing can stay stuck. */
+          if (playOnEnter) {
+            gsap.set(targets, { clearProps: 'opacity,transform,filter,willChange,--scroll-float-mix' });
+          }
         }
       });
       const add = (fromVars, toVars) => {
@@ -233,7 +248,8 @@ const ScrollFloat = ({
     stagger,
     distance,
     stretch,
-    smoothing
+    smoothing,
+    playOnEnter
   ]);
 
   return (

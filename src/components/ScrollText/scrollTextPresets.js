@@ -2,17 +2,18 @@
    Tune the feel in this one file. */
 
 /* Section titles (ScrollFloat) */
+/* Section titles (ScrollFloat) */
+/* Section titles (ScrollFloat) */
+/* Section titles (ScrollFloat) */
 export const FLOAT_TITLE = {
   effect: "float",
   splitBy: "words",
   stretch: 1,
   distance: 100,
   stagger: 0.14,
-  animationDuration: 1,
+  animationDuration: 1.1,
   ease: "power3.out",
-  smoothing: 1.2,
-  scrollStart: "top bottom-=5%",
-  scrollEnd: "top 35%",
+  playOnEnter: true,
 };
 
 /* Section descriptions (ScrollReveal, scroll-linked) */
