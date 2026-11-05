@@ -24,11 +24,19 @@ const INITIAL_VOLUME =
     ? MOBILE_VOLUME
     : DESKTOP_VOLUME;
 
+/* Pick a random song to start with, so visitors don't always hear track 1 */
+const getRandomTrackIndex = () =>
+  playlist.length > 1
+    ? Math.floor(Math.random() * playlist.length)
+    : 0;
+
 const useMusicPlayer = () => {
   const audioRef = useRef(null);
   const shouldContinuePlayingRef = useRef(false);
 
-  const [trackIndex, setTrackIndex] = useState(0);
+  const [trackIndex, setTrackIndex] = useState(
+    getRandomTrackIndex
+  );
   const [isPlaying, setIsPlaying] = useState(false);
 
   const [currentTime, setCurrentTime] = useState(0);
