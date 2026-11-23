@@ -19,6 +19,7 @@ import portfolio2024Thumbnail from "../../assets/thumbnail/Portfolio(2024).webp"
 import SocialThumbnail from "../../assets/thumbnail/Socials.webp";
 import JuristbotThumbnail from "../../assets/thumbnail/Juristbot.webp";
 import DiginestThumbnail from "../../assets/thumbnail/Diginest.webp";
+import INKEDThumbnail from "../../assets/thumbnail/INKED.webp";
 
 
 /*
@@ -81,6 +82,12 @@ const projectGroups = [
     number: "03",
     label: "UI CRAFTS",
     projects: [
+      {
+        title: "Inked, Tattoo Studio Landing Page",
+        category: "AI / PRODUCT DESIGN",
+        image: INKEDThumbnail,
+        href: "https://www.behance.net/gallery/258905007/Inked-Tattoo-and-Piercing-Studio-Landing-Page",
+      },
       {
         title: "DirtRiot, e-bike Landing Page",
         category: "AI / PRODUCT DESIGN",
