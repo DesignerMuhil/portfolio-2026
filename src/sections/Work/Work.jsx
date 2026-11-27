@@ -20,6 +20,7 @@ import SocialThumbnail from "../../assets/thumbnail/Socials.webp";
 import JuristbotThumbnail from "../../assets/thumbnail/Juristbot.webp";
 import DiginestThumbnail from "../../assets/thumbnail/Diginest.webp";
 import INKEDThumbnail from "../../assets/thumbnail/INKED.webp";
+import RaretiqueThumbnail from "../../assets/thumbnail/Raretique.webp";
 
 
 /*
@@ -87,6 +88,12 @@ const projectGroups = [
         category: "AI / PRODUCT DESIGN",
         image: INKEDThumbnail,
         href: "https://www.behance.net/gallery/258905007/Inked-Tattoo-and-Piercing-Studio-Landing-Page",
+      },
+      {
+        title: "Raretique, Rare Collectables House Landing Page",
+        category: "AI / PRODUCT DESIGN",
+        image: RaretiqueThumbnail,
+        href: "https://www.behance.net/gallery/259109375/Raretique-Landing-Page-for-a-Rare-Collectables-House",
       },
       {
         title: "DirtRiot, e-bike Landing Page",
